@@ -10,7 +10,7 @@ const Piece = ({ rank, file, piece }) => {
   const dispatch = useDispatch()
 
   const onDragStart = (e) => {
-    e.dataTransfer.effectAllowed = "move"
+    // e.dataTransfer.effectAllowed = "move"
     e.dataTransfer.setData("text/plain", `${piece},${rank},${file}`)
 
     setTimeout(() => {
