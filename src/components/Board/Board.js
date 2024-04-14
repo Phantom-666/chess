@@ -3,6 +3,7 @@ import "./Board.css"
 import Pieces from "./Pieces/Pieces"
 import Files from "./bits/Files"
 import Ranks from "./bits/Ranks"
+import Popup from "../Popup.js/Popup"
 
 const Board = () => {
   const appState = useSelector((state) => state.chess)
@@ -42,6 +43,7 @@ const Board = () => {
       </div>
 
       <Pieces />
+      <Popup />
       <Files files={files} />
     </div>
   )

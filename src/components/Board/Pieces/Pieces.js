@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux"
 import {
   clearCandidates,
   makeNewMove,
+  openPromotion,
 } from "../../../reducer/chess/chessActions"
+import arbiter from "../../../arbiter/arbiter"
 
 const Pieces = () => {
   const ref = useRef()
@@ -25,24 +27,40 @@ const Pieces = () => {
     return { x, y }
   }
 
-  const onDrop = (e) => {
-    const newPosition = copyPosition(currentPosition)
+  const openPromotionBox = ({ rank, file, x, y }) => {
+    dispatch(openPromotion({ rank: Number(rank), file: Number(file), x, y }))
+  }
 
+  const move = (e) => {
     const { x, y } = calcCoord(e)
 
-    const [p, rank, file] = e.dataTransfer.getData("text").split(",")
+    const [piece, rank, file] = e.dataTransfer.getData("text").split(",")
 
     if (appState.candidateMoves?.find((m) => m[0] === x && m[1] === y)) {
-      if (p.endsWith("p") && !newPosition[x][y] && x !== rank && y !== file) {
-        newPosition[rank][y] = ""
+      if ((piece === "wp" && x === 7) || (piece === "bp" && x === 0)) {
+        openPromotionBox({ rank, file, x, y })
+        console.log("promoting", appState)
+
+        return
       }
 
-      newPosition[rank][file] = ""
-      newPosition[x][y] = p
-
+      const newPosition = arbiter.performMove({
+        position: currentPosition,
+        piece,
+        rank,
+        file,
+        x,
+        y,
+      })
       dispatch(makeNewMove({ newPosition }))
     }
     dispatch(clearCandidates())
+  }
+
+  const onDrop = (e) => {
+    e.preventDefault()
+
+    move(e)
   }
   const onDragOver = (e) => e.preventDefault()
   return (

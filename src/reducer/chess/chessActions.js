@@ -1,7 +1,9 @@
 import {
   CLEAR_CANDIDATE_MOVES,
+  CLOSE_POPUP,
   GENERATE_CANDIDATE_MOVES,
   MAKE_NEW_MOVE,
+  OPEN_PROMOTION,
 } from "./types"
 
 export const makeNewMove = (payload) => {
@@ -17,4 +19,12 @@ export const generateCandidateMoves = (payload) => {
 
 export const clearCandidates = () => {
   return { type: CLEAR_CANDIDATE_MOVES }
+}
+
+export const openPromotion = (payload) => {
+  return { type: OPEN_PROMOTION, payload }
+}
+
+export const closePopup = () => {
+  return { type: CLOSE_POPUP }
 }

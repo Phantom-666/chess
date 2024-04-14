@@ -1,14 +1,25 @@
 import {
   CLEAR_CANDIDATE_MOVES,
+  CLOSE_POPUP,
   GENERATE_CANDIDATE_MOVES,
   MAKE_NEW_MOVE,
+  OPEN_PROMOTION,
 } from "./types"
 import { createPosition } from "../../utils"
+
+export const gameStatus = {
+  onGoing: "ongoing",
+  promoting: "promoting",
+  white: "White wins",
+  black: "Black wins",
+}
 
 const initialState = {
   position: [createPosition()],
   turn: "w",
   candidateMoves: [],
+  status: gameStatus.onGoing,
+  promotionSquare: null,
 }
 
 export const chessReducer = (state = initialState, action) => {
@@ -36,6 +47,22 @@ export const chessReducer = (state = initialState, action) => {
 
     case CLEAR_CANDIDATE_MOVES: {
       return { ...state, candidateMoves: [] }
+    }
+
+    case OPEN_PROMOTION: {
+      return {
+        ...state,
+        status: gameStatus.promoting,
+        promotionSquare: { ...action.payload },
+      }
+    }
+
+    case CLOSE_POPUP: {
+      return {
+        ...state,
+        status: gameStatus.onGoing,
+        promotionSquare: null,
+      }
     }
     default:
       return state
