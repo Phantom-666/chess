@@ -3,7 +3,10 @@ import Piece from "./Piece"
 import { useRef } from "react"
 import { copyPosition } from "../../../utils"
 import { useDispatch, useSelector } from "react-redux"
-import { makeNewMove } from "../../../reducer/chess/chessActions"
+import {
+  clearCandidates,
+  makeNewMove,
+} from "../../../reducer/chess/chessActions"
 
 const Pieces = () => {
   const ref = useRef()
@@ -29,10 +32,17 @@ const Pieces = () => {
 
     const [p, rank, file] = e.dataTransfer.getData("text").split(",")
 
-    newPosition[rank][file] = ""
-    newPosition[x][y] = p
+    if (appState.candidateMoves?.find((m) => m[0] === x && m[1] === y)) {
+      if (p.endsWith("p") && !newPosition[x][y] && x !== rank && y !== file) {
+        newPosition[rank][y] = ""
+      }
 
-    dispatch(makeNewMove({ newPosition }))
+      newPosition[rank][file] = ""
+      newPosition[x][y] = p
+
+      dispatch(makeNewMove({ newPosition }))
+    }
+    dispatch(clearCandidates())
   }
   const onDragOver = (e) => e.preventDefault()
   return (

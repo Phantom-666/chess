@@ -10,12 +10,31 @@
   width: calc(8 * 100px);
 }
 
-.tile {
-}
-
 .tile-light {
   background: white;
 }
 .tile-dark {
   background: #222426;
+}
+
+.highlight::after {
+  content: "";
+  display: block;
+  width: calc(0.25 * 100px);
+  height: calc(0.25 * 100px);
+  background-color: #343a42;
+  border-radius: 50%;
+  margin-top: 37%;
+  margin-left: 37%;
+}
+
+.attacking::after {
+  content: "";
+  display: block;
+  width: calc(0.7 * 100px);
+  height: calc(0.7 * 100px);
+  border-radius: 50%;
+  margin-top: 11%;
+  margin-left: 11%;
+  border: 5px solid #343a42;
 }

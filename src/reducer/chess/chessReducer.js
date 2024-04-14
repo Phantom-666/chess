@@ -1,9 +1,14 @@
-import { MAKE_NEW_MOVE } from "./types"
+import {
+  CLEAR_CANDIDATE_MOVES,
+  GENERATE_CANDIDATE_MOVES,
+  MAKE_NEW_MOVE,
+} from "./types"
 import { createPosition } from "../../utils"
 
 const initialState = {
   position: [createPosition()],
   turn: "w",
+  candidateMoves: [],
 }
 
 export const chessReducer = (state = initialState, action) => {
@@ -20,6 +25,17 @@ export const chessReducer = (state = initialState, action) => {
         turn,
         position,
       }
+    }
+
+    case GENERATE_CANDIDATE_MOVES: {
+      return {
+        ...state,
+        candidateMoves: action.payload.candidateMoves,
+      }
+    }
+
+    case CLEAR_CANDIDATE_MOVES: {
+      return { ...state, candidateMoves: [] }
     }
     default:
       return state
