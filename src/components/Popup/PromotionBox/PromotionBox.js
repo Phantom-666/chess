@@ -37,7 +37,6 @@ const PromotionBox = ({ onClosePopup }) => {
   return (
     <>
       <div className="popup-inner promotions-choices">
-        <h1>You can chose</h1>
         {options.map((option, i) => (
           <div
             key={i}

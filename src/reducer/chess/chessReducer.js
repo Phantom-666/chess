@@ -4,7 +4,9 @@ import {
   CLOSE_POPUP,
   GENERATE_CANDIDATE_MOVES,
   MAKE_NEW_MOVE,
+  NEW_GAME,
   OPEN_PROMOTION,
+  STALEMATE,
 } from "./types"
 import { createPosition } from "../../utils"
 
@@ -13,6 +15,7 @@ export const gameStatus = {
   promoting: "promoting",
   white: "White wins",
   black: "Black wins",
+  stalemate: "Stalemate",
 }
 
 const initialState = {
@@ -82,6 +85,25 @@ export const chessReducer = (state = initialState, action) => {
         castleDirection: newCastleDirection,
       }
     }
+
+    case STALEMATE: {
+      return { ...state, status: gameStatus.stalemate }
+    }
+
+    case NEW_GAME: {
+      return {
+        position: [createPosition()],
+        turn: "w",
+        candidateMoves: [],
+        status: gameStatus.onGoing,
+        promotionSquare: null,
+        castleDirection: {
+          w: "both",
+          b: "both",
+        },
+      }
+    }
+
     default:
       return state
   }

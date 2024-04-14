@@ -1,6 +1,7 @@
-/* .promotions-choices {
-  height: 20%;
-} */
+.promotions-choices {
+  left: 40%;
+  top: 1%;
+}
 
 .promotions-choices .piece {
   width: 25%;

@@ -5,6 +5,7 @@ import { copyPosition } from "../../../utils"
 import { useDispatch, useSelector } from "react-redux"
 import {
   clearCandidates,
+  detectStalemate,
   makeNewMove,
   openPromotion,
   updateCastling,
@@ -52,9 +53,11 @@ const Pieces = () => {
     const [piece, rank, file] = e.dataTransfer.getData("text").split(",")
 
     if (appState.candidateMoves?.find((m) => m[0] === x && m[1] === y)) {
+      const opponent = piece.startsWith("b") ? "w" : "b"
+      const castleDirection = appState.castleDirection[`${opponent}`]
+
       if ((piece === "wp" && x === 7) || (piece === "bp" && x === 0)) {
         openPromotionBox({ rank, file, x, y })
-        console.log("promoting", appState)
 
         return
       }
@@ -72,6 +75,10 @@ const Pieces = () => {
         y,
       })
       dispatch(makeNewMove({ newPosition }))
+
+      if (arbiter.isStalemate(newPosition, opponent, castleDirection)) {
+        dispatch(detectStalemate())
+      }
     }
     dispatch(clearCandidates())
   }

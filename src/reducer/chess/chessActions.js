@@ -4,7 +4,9 @@ import {
   CLOSE_POPUP,
   GENERATE_CANDIDATE_MOVES,
   MAKE_NEW_MOVE,
+  NEW_GAME,
   OPEN_PROMOTION,
+  STALEMATE,
 } from "./types"
 
 export const makeNewMove = (payload) => {
@@ -32,4 +34,14 @@ export const closePopup = () => {
 
 export const updateCastling = (payload) => {
   return { type: CAN_CASTLE, payload }
+}
+
+export const detectStalemate = () => {
+  return { type: STALEMATE }
+}
+
+export const setupNewGame = () => {
+  return {
+    type: NEW_GAME,
+  }
 }

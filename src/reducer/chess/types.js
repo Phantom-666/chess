@@ -6,3 +6,7 @@ export const CLEAR_CANDIDATE_MOVES = "CLEAR_CANDIDATE_MOVES"
 export const OPEN_PROMOTION = "OPEN_PROMOTION"
 export const CLOSE_POPUP = "CLOSE_POPUP"
 export const CAN_CASTLE = "CAN_CASTLE"
+
+export const STALEMATE = "STALEMATE"
+
+export const NEW_GAME = "NEW_GAME"
