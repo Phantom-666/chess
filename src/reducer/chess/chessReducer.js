@@ -3,10 +3,12 @@ import {
   CLEAR_CANDIDATE_MOVES,
   CLOSE_POPUP,
   GENERATE_CANDIDATE_MOVES,
+  INSUFFICIENT_MATERIAL,
   MAKE_NEW_MOVE,
   NEW_GAME,
   OPEN_PROMOTION,
   STALEMATE,
+  CHECKMATE,
 } from "./types"
 import { createPosition } from "../../utils"
 
@@ -16,6 +18,7 @@ export const gameStatus = {
   white: "White wins",
   black: "Black wins",
   stalemate: "Stalemate",
+  insufficientMaterial: "Insufficient material",
 }
 
 const initialState = {
@@ -101,6 +104,17 @@ export const chessReducer = (state = initialState, action) => {
           w: "both",
           b: "both",
         },
+      }
+    }
+
+    case INSUFFICIENT_MATERIAL: {
+      return { ...state, status: gameStatus.insufficientMaterial }
+    }
+
+    case CHECKMATE: {
+      return {
+        ...state,
+        status: action.payload === "w" ? gameStatus.white : gameStatus.black,
       }
     }
 

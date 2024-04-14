@@ -24,17 +24,11 @@ const Popup = () => {
     )
   }
 
-  if (
-    appState.status === gameStatus.stalemate ||
-    appState.status === gameStatus.white ||
-    appState.status === gameStatus.black
-  ) {
-    return (
-      <div className="popup">
-        <GameEnds />
-      </div>
-    )
-  }
+  return (
+    <div className="popup">
+      <GameEnds />
+    </div>
+  )
 }
 
 export default Popup

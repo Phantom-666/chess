@@ -1,8 +1,10 @@
 import {
   CAN_CASTLE,
+  CHECKMATE,
   CLEAR_CANDIDATE_MOVES,
   CLOSE_POPUP,
   GENERATE_CANDIDATE_MOVES,
+  INSUFFICIENT_MATERIAL,
   MAKE_NEW_MOVE,
   NEW_GAME,
   OPEN_PROMOTION,
@@ -40,8 +42,16 @@ export const detectStalemate = () => {
   return { type: STALEMATE }
 }
 
+export const detectInsufficientMaterial = () => {
+  return { type: INSUFFICIENT_MATERIAL }
+}
+
 export const setupNewGame = () => {
   return {
     type: NEW_GAME,
   }
+}
+
+export const detectCheckmate = (payload) => {
+  return { type: CHECKMATE, payload }
 }

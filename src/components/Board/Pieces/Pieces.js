@@ -5,6 +5,8 @@ import { copyPosition } from "../../../utils"
 import { useDispatch, useSelector } from "react-redux"
 import {
   clearCandidates,
+  detectCheckmate,
+  detectInsufficientMaterial,
   detectStalemate,
   makeNewMove,
   openPromotion,
@@ -76,8 +78,12 @@ const Pieces = () => {
       })
       dispatch(makeNewMove({ newPosition }))
 
-      if (arbiter.isStalemate(newPosition, opponent, castleDirection)) {
+      if (arbiter.insufficientMaterial(newPosition)) {
+        dispatch(detectInsufficientMaterial())
+      } else if (arbiter.isStalemate(newPosition, opponent, castleDirection)) {
         dispatch(detectStalemate())
+      } else if (arbiter.isCheckMate(newPosition, opponent, castleDirection)) {
+        dispatch(detectCheckmate(piece[0]))
       }
     }
     dispatch(clearCandidates())

@@ -10,3 +10,6 @@ export const CAN_CASTLE = "CAN_CASTLE"
 export const STALEMATE = "STALEMATE"
 
 export const NEW_GAME = "NEW_GAME"
+
+export const INSUFFICIENT_MATERIAL = "INSUFFICIENT_MATERIAL"
+export const CHECKMATE = "CHECKMATE"
