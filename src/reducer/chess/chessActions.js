@@ -1,4 +1,5 @@
 import {
+  CAN_CASTLE,
   CLEAR_CANDIDATE_MOVES,
   CLOSE_POPUP,
   GENERATE_CANDIDATE_MOVES,
@@ -27,4 +28,8 @@ export const openPromotion = (payload) => {
 
 export const closePopup = () => {
   return { type: CLOSE_POPUP }
+}
+
+export const updateCastling = (payload) => {
+  return { type: CAN_CASTLE, payload }
 }

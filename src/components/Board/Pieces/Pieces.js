@@ -7,8 +7,10 @@ import {
   clearCandidates,
   makeNewMove,
   openPromotion,
+  updateCastling,
 } from "../../../reducer/chess/chessActions"
 import arbiter from "../../../arbiter/arbiter"
+import { getCastlingDirections } from "../../../arbiter/getMoves"
 
 const Pieces = () => {
   const ref = useRef()
@@ -31,6 +33,19 @@ const Pieces = () => {
     dispatch(openPromotion({ rank: Number(rank), file: Number(file), x, y }))
   }
 
+  const updateCastlingState = ({ piece, rank, file }) => {
+    const direction = getCastlingDirections({
+      castleDirection: appState.castleDirection,
+      piece,
+      rank,
+      file,
+    })
+
+    if (direction) {
+      dispatch(updateCastling(direction))
+    }
+  }
+
   const move = (e) => {
     const { x, y } = calcCoord(e)
 
@@ -42,6 +57,10 @@ const Pieces = () => {
         console.log("promoting", appState)
 
         return
+      }
+
+      if (piece.endsWith("r") || piece.endsWith("k")) {
+        updateCastlingState({ piece, rank, file })
       }
 
       const newPosition = arbiter.performMove({

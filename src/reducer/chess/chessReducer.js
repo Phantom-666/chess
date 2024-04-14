@@ -1,4 +1,5 @@
 import {
+  CAN_CASTLE,
   CLEAR_CANDIDATE_MOVES,
   CLOSE_POPUP,
   GENERATE_CANDIDATE_MOVES,
@@ -20,6 +21,10 @@ const initialState = {
   candidateMoves: [],
   status: gameStatus.onGoing,
   promotionSquare: null,
+  castleDirection: {
+    w: "both",
+    b: "both",
+  },
 }
 
 export const chessReducer = (state = initialState, action) => {
@@ -62,6 +67,19 @@ export const chessReducer = (state = initialState, action) => {
         ...state,
         status: gameStatus.onGoing,
         promotionSquare: null,
+      }
+    }
+
+    case CAN_CASTLE: {
+      let { turn, castleDirection } = state
+
+      const newCastleDirection = { ...castleDirection }
+
+      newCastleDirection[turn] = action.payload
+
+      return {
+        ...state,
+        castleDirection: newCastleDirection,
       }
     }
     default:

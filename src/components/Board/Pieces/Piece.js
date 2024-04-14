@@ -5,7 +5,7 @@ import { generateCandidateMoves } from "../../../reducer/chess/chessActions"
 const Piece = ({ rank, file, piece }) => {
   const appState = useSelector((state) => state.chess)
 
-  const { turn, position } = appState
+  const { turn, position: currentPosition, castleDirection } = appState
 
   const dispatch = useDispatch()
 
@@ -19,8 +19,9 @@ const Piece = ({ rank, file, piece }) => {
 
     if (turn === piece[0]) {
       const candidateMoves = arbiter.getValidMoves({
-        position: position[position.length - 1],
-        prevPosition: position[position.length - 2],
+        position: currentPosition[currentPosition.length - 1],
+        prevPosition: currentPosition[currentPosition.length - 2],
+        castleDirection: castleDirection[turn],
         piece,
         rank,
         file,
