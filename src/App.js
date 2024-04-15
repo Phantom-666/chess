@@ -4,6 +4,7 @@ import { Provider } from "react-redux"
 import store from "./reducer"
 import Control from "./components/Control/Control"
 import TakeBack from "./components/Control/TakeBack"
+import ColorPicker from "./components/Control/ColorPicker"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Board />
         <Control>
           <TakeBack />
+          <ColorPicker />
         </Control>
       </Provider>
     </div>

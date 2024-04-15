@@ -25,10 +25,10 @@
 }
 
 .tile-light {
-  background: white;
+  /* background: white; */
 }
 .tile-dark {
-  background: #222426;
+  /* background: #222426; */
 }
 
 .highlight:after {

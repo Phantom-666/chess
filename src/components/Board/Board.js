@@ -12,6 +12,8 @@ const Board = () => {
   const appState = useSelector((state) => state.chess)
   const position = appState.position[appState.position.length - 1]
 
+  const colorState = useSelector((state) => state.colors)
+
   const ranks = Array(8)
     .fill()
     .map((x, i) => 8 - i)
@@ -70,6 +72,12 @@ const Board = () => {
         {ranks.map((rank, i) =>
           files.map((file, j) => (
             <div
+              style={{
+                backgroundColor:
+                  (i + j) % 2 === 0
+                    ? colorState["tile-dark"]
+                    : colorState["tile-light"],
+              }}
               key={file + "-" + rank}
               className={getClassName(7 - i, j)}
             ></div>
