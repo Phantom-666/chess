@@ -9,6 +9,7 @@ import {
   NEW_GAME,
   OPEN_PROMOTION,
   STALEMATE,
+  START_GAME,
   TAKE_BACK,
 } from "./types"
 
@@ -60,5 +61,12 @@ export const detectCheckmate = (payload) => {
 export const takeBack = () => {
   return {
     type: TAKE_BACK,
+  }
+}
+
+export const startGame = (payload) => {
+  return {
+    type: START_GAME,
+    payload,
   }
 }

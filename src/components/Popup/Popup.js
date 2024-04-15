@@ -5,6 +5,7 @@ import { gameStatus } from "../../reducer/chess/chessReducer"
 import { closePopup } from "../../reducer/chess/chessActions"
 import GameEnds from "./GameEnds/GameEnds"
 import PromotionBox from "./PromotionBox/PromotionBox"
+import Main from "../../Main"
 
 const Popup = () => {
   const appState = useSelector((state) => state.chess)
@@ -20,6 +21,14 @@ const Popup = () => {
     return (
       <div className="popup">
         <PromotionBox onClosePopup={onClosePopup} />
+      </div>
+    )
+  }
+
+  if (appState.status === gameStatus.choosingColor) {
+    return (
+      <div className="popup">
+        <Main />
       </div>
     )
   }

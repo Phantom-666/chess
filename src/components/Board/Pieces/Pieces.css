@@ -53,6 +53,47 @@
   background-image: url("../../assets/wp.png");
 }
 
+/* reverse */
+
+.piece.wk-r {
+  background-image: url("../../assets/bk.png");
+}
+.piece.wq-r {
+  background-image: url("../../assets/bq.png");
+}
+.piece.wr-r {
+  background-image: url("../../assets/br.png");
+}
+.piece.wb-r {
+  background-image: url("../../assets/bb.png");
+}
+.piece.wn-r {
+  background-image: url("../../assets/bn.png");
+}
+.piece.wp-r {
+  background-image: url("../../assets/bp.png");
+}
+.piece.bk-r {
+  background-image: url("../../assets/wk.png");
+}
+.piece.bq-r {
+  background-image: url("../../assets/wq.png");
+}
+.piece.br-r {
+  background-image: url("../../assets/wr.png");
+}
+.piece.bb-r {
+  background-image: url("../../assets/wb.png");
+}
+.piece.bn-r {
+  background-image: url("../../assets/wn.png");
+}
+.piece.bp-r {
+  background-image: url("../../assets/wp.png");
+}
+
+/*  */
+
 .piece.p-07 {
   transform: translate(0%, 0%);
 }

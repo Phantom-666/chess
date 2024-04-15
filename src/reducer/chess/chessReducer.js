@@ -10,10 +10,12 @@ import {
   STALEMATE,
   CHECKMATE,
   TAKE_BACK,
+  START_GAME,
 } from "./types"
 import { createPosition } from "../../utils"
 
 export const gameStatus = {
+  choosingColor: "choosing color",
   onGoing: "ongoing",
   promoting: "promoting",
   white: "White wins",
@@ -23,16 +25,18 @@ export const gameStatus = {
 }
 
 const initialState = {
-  position: [createPosition()],
+  position: [createPosition({ turn: "w" })],
   turn: "w",
   candidateMoves: [],
   movesList: [],
-  status: gameStatus.onGoing,
+  status: gameStatus.choosingColor,
   promotionSquare: null,
   castleDirection: {
     w: "both",
     b: "both",
   },
+
+  isReverse: false,
 }
 
 export const chessReducer = (state = initialState, action) => {
@@ -97,8 +101,23 @@ export const chessReducer = (state = initialState, action) => {
 
     case NEW_GAME: {
       return {
-        position: [createPosition()],
+        position: [createPosition({ turn: "w" })],
         turn: "w",
+        candidateMoves: [],
+        status: gameStatus.choosingColor,
+        promotionSquare: null,
+        castleDirection: {
+          w: "both",
+          b: "both",
+        },
+        isReverse: false,
+      }
+    }
+
+    case START_GAME: {
+      return {
+        position: [createPosition({ turn: action.payload.turn })],
+        turn: action.payload.turn,
         candidateMoves: [],
         status: gameStatus.onGoing,
         promotionSquare: null,
@@ -106,6 +125,7 @@ export const chessReducer = (state = initialState, action) => {
           w: "both",
           b: "both",
         },
+        isReverse: action.payload.isReverse,
       }
     }
 
@@ -114,9 +134,15 @@ export const chessReducer = (state = initialState, action) => {
     }
 
     case CHECKMATE: {
+      let status = action.payload === "w" ? gameStatus.white : gameStatus.black
+
+      if (state.isReverse) {
+        status = action.payload === "w" ? gameStatus.black : gameStatus.white
+      }
+
       return {
         ...state,
-        status: action.payload === "w" ? gameStatus.white : gameStatus.black,
+        status,
       }
     }
 

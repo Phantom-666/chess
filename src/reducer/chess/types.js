@@ -14,3 +14,5 @@ export const NEW_GAME = "NEW_GAME"
 export const INSUFFICIENT_MATERIAL = "INSUFFICIENT_MATERIAL"
 export const CHECKMATE = "CHECKMATE"
 export const TAKE_BACK = "TAKE_BACK"
+
+export const START_GAME = "START_GAME"

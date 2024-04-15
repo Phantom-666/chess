@@ -47,10 +47,17 @@ const Board = () => {
 
   const TurnTable = () => {
     const turn = useSelector((state) => state.chess.turn)
+    const isReverse = useSelector((state) => state.chess.isReverse)
+
+    let t = turn === "w" ? "WHITE" : "BLACK"
+
+    if (isReverse) {
+      t = turn === "w" ? "BLACK" : "WHITE"
+    }
 
     return (
       <div className={"turn-table " + `turn-table-${turn}`}>
-        <h1>Turn : {turn === "w" ? "WHITE" : "BLACK"}</h1>
+        <h1>Turn : {t}</h1>
       </div>
     )
   }

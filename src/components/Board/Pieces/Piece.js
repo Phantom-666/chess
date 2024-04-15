@@ -5,7 +5,12 @@ import { generateCandidateMoves } from "../../../reducer/chess/chessActions"
 const Piece = ({ rank, file, piece }) => {
   const appState = useSelector((state) => state.chess)
 
-  const { turn, position: currentPosition, castleDirection } = appState
+  const {
+    turn,
+    position: currentPosition,
+    castleDirection,
+    isReverse,
+  } = appState
 
   const dispatch = useDispatch()
 
@@ -35,7 +40,7 @@ const Piece = ({ rank, file, piece }) => {
   return (
     <div
       onDragEnd={onDragEnd}
-      className={`piece ${piece} p-${file}${rank}`}
+      className={`piece ${piece}${isReverse ? "-r" : ""} p-${file}${rank}`}
       draggable={true}
       onDragStart={onDragStart}
     ></div>
