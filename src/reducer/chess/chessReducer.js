@@ -11,6 +11,7 @@ import {
   CHECKMATE,
   TAKE_BACK,
   START_GAME,
+  SURRENDER,
 } from "./types"
 import { createPosition } from "../../utils"
 
@@ -159,6 +160,19 @@ export const chessReducer = (state = initialState, action) => {
         position,
         movesList,
         turn,
+      }
+    }
+
+    case SURRENDER: {
+      let status = state.turn === "w" ? gameStatus.black : gameStatus.white
+
+      if (state.isReverse) {
+        status = state.turn === "w" ? gameStatus.white : gameStatus.black
+      }
+
+      return {
+        ...state,
+        status,
       }
     }
 

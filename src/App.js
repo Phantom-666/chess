@@ -5,6 +5,7 @@ import store from "./reducer"
 import Control from "./components/Control/Control"
 import TakeBack from "./components/Control/TakeBack"
 import ColorPicker from "./components/Control/ColorPicker"
+import Surrender from "./components/Control/Surrender"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Control>
           <TakeBack />
           <ColorPicker />
+          <Surrender />
         </Control>
       </Provider>
     </div>

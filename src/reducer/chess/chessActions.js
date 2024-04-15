@@ -10,6 +10,7 @@ import {
   OPEN_PROMOTION,
   STALEMATE,
   START_GAME,
+  SURRENDER,
   TAKE_BACK,
 } from "./types"
 
@@ -69,4 +70,8 @@ export const startGame = (payload) => {
     type: START_GAME,
     payload,
   }
+}
+
+export const surrender = () => {
+  return { type: SURRENDER }
 }
