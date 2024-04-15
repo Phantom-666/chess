@@ -9,6 +9,7 @@ import {
   OPEN_PROMOTION,
   STALEMATE,
   CHECKMATE,
+  TAKE_BACK,
 } from "./types"
 import { createPosition } from "../../utils"
 
@@ -25,6 +26,7 @@ const initialState = {
   position: [createPosition()],
   turn: "w",
   candidateMoves: [],
+  movesList: [],
   status: gameStatus.onGoing,
   promotionSquare: null,
   castleDirection: {
@@ -115,6 +117,22 @@ export const chessReducer = (state = initialState, action) => {
       return {
         ...state,
         status: action.payload === "w" ? gameStatus.white : gameStatus.black,
+      }
+    }
+
+    case TAKE_BACK: {
+      let { position, movesList, turn } = state
+      if (position.length > 1) {
+        position = position.slice(0, position.length - 1)
+        movesList = movesList.slice(0, movesList.length - 1)
+        turn = turn === "w" ? "b" : "w"
+      }
+
+      return {
+        ...state,
+        position,
+        movesList,
+        turn,
       }
     }
 

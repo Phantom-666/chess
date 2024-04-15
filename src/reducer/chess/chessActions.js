@@ -9,6 +9,7 @@ import {
   NEW_GAME,
   OPEN_PROMOTION,
   STALEMATE,
+  TAKE_BACK,
 } from "./types"
 
 export const makeNewMove = (payload) => {
@@ -54,4 +55,10 @@ export const setupNewGame = () => {
 
 export const detectCheckmate = (payload) => {
   return { type: CHECKMATE, payload }
+}
+
+export const takeBack = () => {
+  return {
+    type: TAKE_BACK,
+  }
 }
