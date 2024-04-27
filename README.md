@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+Это приложение на React с использованием Redux, где можно играть в шахматы
+
+![Alt text](./images/1.png?raw=true "Title")
+![Alt text](./images/2.jpg?raw=true "Title")
+![Alt text](./images/3.jpg?raw=true "Title")
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
